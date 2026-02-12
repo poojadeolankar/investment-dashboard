@@ -1,0 +1,776 @@
+/* =========================
+   CSS Reset & Base Styles
+   ========================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Professional Finance Color Palette */
+  --primary-dark: #0f172a;         /* Navy blue - headers */
+  --primary-blue: #1e40af;         /* Professional blue */
+  --primary-light: #3b82f6;        /* Bright blue - accents */
+  --success-green: #047857;        /* Positive returns */
+  --success-light: #10b981;        /* Light green */
+  --danger-red: #dc2626;           /* Negative returns */
+  --warning-orange: #f59e0b;       /* Medium risk */
+  --bg-primary: #ffffff;           /* White background */
+  --bg-secondary: #f8fafc;         /* Light gray */
+  --bg-tertiary: #f1f5f9;          /* Lighter gray */
+  --text-primary: #0f172a;         /* Dark text */
+  --text-secondary: #475569;       /* Medium gray text */
+  --text-muted: #94a3b8;           /* Light gray text */
+  --border-light: #e2e8f0;         /* Light borders */
+  --border-medium: #cbd5e1;        /* Medium borders */
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  
+  /* Spacing */
+  --border-radius: 8px;
+  --border-radius-lg: 12px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background-color: var(--bg-secondary);
+  min-height: 100vh;
+  font-size: 15px;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* =========================
+   Header Section
+   ========================= */
+
+.header {
+  background: linear-gradient(135deg, #0f172a 0%, #1e40af 100%);
+  color: white;
+  border-radius: var(--border-radius-lg);
+  margin-bottom: 48px;
+  box-shadow: var(--shadow-xl);
+  overflow: hidden;
+  position: relative;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+  opacity: 0.6;
+}
+
+.header-content {
+  position: relative;
+  z-index: 1;
+  padding: 48px 40px;
+  text-align: center;
+}
+
+.header h1 {
+  font-size: 2.75rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  font-size: 1.15rem;
+  opacity: 0.92;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+}
+
+/* =========================
+   Section Headers
+   ========================= */
+
+.section-header {
+  margin-bottom: 32px;
+}
+
+.section-header h2 {
+  font-size: 1.75rem;
+  color: var(--primary-dark);
+  margin-bottom: 8px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.section-description {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* =========================
+   Fund Cards Grid
+   ========================= */
+
+.funds-section {
+  margin-bottom: 56px;
+}
+
+.funds-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 28px;
+}
+
+.fund-card {
+  background: var(--bg-primary);
+  border-radius: var(--border-radius-lg);
+  padding: 0;
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  transition: var(--transition);
+  border: 2px solid var(--border-light);
+  overflow: hidden;
+  position: relative;
+}
+
+.fund-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--primary-light);
+}
+
+.fund-card:active {
+  transform: translateY(-2px);
+}
+
+/* Card Header with Color Bar */
+.fund-card-header {
+  padding: 24px 24px 16px 24px;
+  border-bottom: 1px solid var(--border-light);
+  background: linear-gradient(to bottom, var(--bg-primary) 0%, var(--bg-tertiary) 100%);
+}
+
+.fund-card-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.fund-name {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  line-height: 1.3;
+}
+
+.category-badge {
+  display: inline-block;
+  padding: 5px 14px;
+  background-color: var(--primary-blue);
+  color: white;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  white-space: nowrap;
+}
+
+.fund-description {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* Fund Snapshot Metrics */
+.fund-snapshot {
+  padding: 20px 24px 24px 24px;
+}
+
+.snapshot-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.snapshot-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.snapshot-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.snapshot-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.snapshot-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+
+.snapshot-value.return-positive {
+  color: var(--success-green);
+}
+
+.snapshot-value.return-negative {
+  color: var(--danger-red);
+}
+
+.snapshot-value.risk-low {
+  color: var(--success-green);
+}
+
+.snapshot-value.risk-medium {
+  color: var(--warning-orange);
+}
+
+.snapshot-value.risk-high,
+.snapshot-value.risk-mediumhigh {
+  color: var(--danger-red);
+}
+
+/* =========================
+   Comparison Table
+   ========================= */
+
+.comparison-section {
+  margin-bottom: 56px;
+}
+
+.table-container {
+  background: var(--bg-primary);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.comparison-table thead {
+  background: var(--primary-dark);
+  color: white;
+}
+
+.comparison-table th {
+  padding: 18px 20px;
+  text-align: left;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  border-bottom: 2px solid var(--primary-blue);
+}
+
+.comparison-table tbody tr {
+  border-bottom: 1px solid var(--border-light);
+  transition: background-color 0.2s ease;
+}
+
+.comparison-table tbody tr:hover {
+  background-color: var(--bg-tertiary);
+}
+
+.comparison-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.comparison-table td {
+  padding: 18px 20px;
+  color: var(--text-primary);
+}
+
+.comparison-table td:first-child {
+  font-weight: 600;
+  color: var(--primary-blue);
+}
+
+.table-return {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.table-return.positive {
+  color: var(--success-green);
+}
+
+.table-return.negative {
+  color: var(--danger-red);
+}
+
+.table-risk {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.table-risk.low {
+  background-color: #d1fae5;
+  color: var(--success-green);
+}
+
+.table-risk.medium {
+  background-color: #fed7aa;
+  color: #92400e;
+}
+
+.table-risk.high,
+.table-risk.mediumhigh {
+  background-color: #fee2e2;
+  color: var(--danger-red);
+}
+
+/* =========================
+   Fund Details Section
+   ========================= */
+
+.details-section {
+  background: var(--bg-primary);
+  border-radius: var(--border-radius-lg);
+  padding: 40px;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-medium);
+  border-left: 6px solid var(--primary-blue);
+  margin-bottom: 56px;
+  animation: slideIn 0.4s ease-out;
+}
+
+.details-section.hidden {
+  display: none;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.details-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 36px;
+  padding-bottom: 24px;
+  border-bottom: 2px solid var(--border-light);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.details-header h2 {
+  margin: 0;
+  font-size: 2rem;
+  color: var(--primary-dark);
+  font-weight: 700;
+}
+
+.risk-badge {
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.risk-badge.low {
+  background-color: #d1fae5;
+  color: var(--success-green);
+}
+
+.risk-badge.medium {
+  background-color: #fed7aa;
+  color: #92400e;
+}
+
+.risk-badge.high,
+.risk-badge.mediumhigh {
+  background-color: #fee2e2;
+  color: var(--danger-red);
+}
+
+.details-content {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.detail-block {
+  background: var(--bg-secondary);
+  padding: 28px;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-light);
+}
+
+.detail-block h3 {
+  font-size: 1.15rem;
+  color: var(--primary-dark);
+  margin-bottom: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.detail-block h3 .icon {
+  font-size: 1.3rem;
+}
+
+.detail-text {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+.risk-block {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border-color: var(--warning-orange);
+}
+
+.risk-text {
+  color: #78350f;
+  font-weight: 500;
+}
+
+.suitability-block {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  border-color: var(--primary-light);
+}
+
+/* =========================
+   Performance Stats
+   ========================= */
+
+.performance-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px;
+  background-color: white;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-light);
+}
+
+.stat-item.highlight {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border-color: var(--primary-light);
+  border-width: 2px;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.stat-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  line-height: 1.2;
+}
+
+.stat-value.growth {
+  color: var(--success-green);
+}
+
+.stat-value.growth.negative {
+  color: var(--danger-red);
+}
+
+.stat-value.positive {
+  color: var(--success-green);
+}
+
+.stat-value.negative {
+  color: var(--danger-red);
+}
+
+.stat-sublabel {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* =========================
+   Monthly Summary Timeline
+   ========================= */
+
+.monthly-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.month-item {
+  padding: 18px 20px;
+  background-color: white;
+  border-radius: var(--border-radius);
+  border-left: 4px solid var(--primary-light);
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.month-item:hover {
+  background-color: var(--bg-tertiary);
+  border-left-color: var(--primary-blue);
+  transform: translateX(4px);
+}
+
+.month-name {
+  font-weight: 700;
+  color: var(--primary-dark);
+  font-size: 0.9rem;
+  min-width: 90px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.month-return {
+  font-weight: 700;
+  font-size: 1rem;
+  min-width: 70px;
+  text-align: right;
+}
+
+.month-return.positive {
+  color: var(--success-green);
+}
+
+.month-return.negative {
+  color: var(--danger-red);
+}
+
+.month-summary {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  flex: 1;
+}
+
+/* =========================
+   Footer & Disclaimer
+   ========================= */
+
+.footer {
+  margin-top: 80px;
+  padding-top: 40px;
+  border-top: 2px solid var(--border-medium);
+}
+
+.disclaimer {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border: 2px solid var(--warning-orange);
+  border-radius: var(--border-radius-lg);
+  padding: 28px 32px;
+  margin-bottom: 24px;
+}
+
+.disclaimer h4 {
+  color: #78350f;
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.disclaimer p {
+  color: #78350f;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.disclaimer p:last-child {
+  margin-bottom: 0;
+}
+
+.demo-notice {
+  font-weight: 600;
+  font-style: italic;
+}
+
+.copyright {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  padding: 24px 0;
+}
+
+/* =========================
+   Responsive Design
+   ========================= */
+
+@media (max-width: 1024px) {
+  .funds-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+  
+  .performance-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+
+  .header-content {
+    padding: 36px 24px;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .funds-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .details-section {
+    padding: 28px 20px;
+  }
+
+  .details-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .header-left {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .performance-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .comparison-table {
+    font-size: 0.8rem;
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: 12px 10px;
+  }
+
+  .month-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .month-return {
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 1.6rem;
+  }
+
+  .section-header h2 {
+    font-size: 1.4rem;
+  }
+
+  .fund-card-header,
+  .fund-snapshot {
+    padding: 20px;
+  }
+
+  .fund-name {
+    font-size: 1.2rem;
+  }
+
+  .snapshot-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-value {
+    font-size: 1.4rem;
+  }
+
+  .table-container {
+    overflow-x: auto;
+  }
+
+  .comparison-table {
+    min-width: 600px;
+  }
+
+  .detail-block {
+    padding: 20px;
+  }
+
+  .disclaimer {
+    padding: 20px;
+  }
+}

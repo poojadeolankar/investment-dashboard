@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Professional Financial Investment Fund Overview Dashboard">
+  <title>Investment Fund Dashboard | Portfolio Management</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- 
+    STARTUP INSTRUCTIONS:
+    To run this application locally:
+    1. Open terminal in the project directory
+    2. Run: npx serve
+       OR: npx http-server -p 8080
+    3. Open the URL displayed in the terminal (usually http://localhost:3000 or http://localhost:8080)
+  -->
+
+  <div class="container">
+    <!-- Header Section -->
+    <header class="header">
+      <div class="header-content">
+        <h1>Investment Fund Dashboard</h1>
+        <p class="subtitle">Professional Portfolio Management & Fund Analysis Platform</p>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Fund Cards Grid Section -->
+      <section class="funds-section">
+        <div class="section-header">
+          <h2>Available Investment Funds</h2>
+          <p class="section-description">Select a fund to view detailed performance metrics and suitability analysis</p>
+        </div>
+        <div id="fundsList" class="funds-grid">
+          <!-- Fund cards will be dynamically inserted here by JavaScript -->
+        </div>
+      </section>
+
+      <!-- Fund Comparison Table -->
+      <section class="comparison-section">
+        <div class="section-header">
+          <h2>Fund Comparison Matrix</h2>
+          <p class="section-description">Compare key metrics across all available funds</p>
+        </div>
+        <div class="table-container">
+          <table id="comparisonTable" class="comparison-table">
+            <thead>
+              <tr>
+                <th>Fund Name</th>
+                <th>6-Month Return</th>
+                <th>Risk Level</th>
+                <th>Expense Ratio</th>
+                <th>AUM</th>
+                <th>Horizon</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Table rows will be dynamically inserted here -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Fund Details Panel -->
+      <section id="fundDetails" class="details-section hidden">
+        <div class="details-header">
+          <div class="header-left">
+            <h2 id="detailsFundName">Fund Details</h2>
+            <span id="detailsCategory" class="category-badge"></span>
+          </div>
+          <span id="detailsRiskBadge" class="risk-badge"></span>
+        </div>
+        
+        <div class="details-content">
+          
+          <!-- Investment Objective -->
+          <div class="detail-block">
+            <h3><span class="icon">📋</span> Investment Objective</h3>
+            <p id="detailsObjective" class="detail-text"></p>
+          </div>
+
+          <!-- Performance Metrics -->
+          <div class="detail-block">
+            <h3><span class="icon">📊</span> Performance Summary</h3>
+            <div class="performance-stats">
+              <div class="stat-item">
+                <span class="stat-label">Starting Value</span>
+                <span id="detailsStartValue" class="stat-value">$0</span>
+                <span class="stat-sublabel">August 2025</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">Current Value</span>
+                <span id="detailsCurrentValue" class="stat-value">$0</span>
+                <span class="stat-sublabel">February 2026</span>
+              </div>
+              <div class="stat-item highlight">
+                <span class="stat-label">6-Month Return</span>
+                <span id="detailsGrowth" class="stat-value growth">0%</span>
+                <span class="stat-sublabel">Total Growth</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">Best Month</span>
+                <span id="detailsBestMonth" class="stat-value positive">--</span>
+                <span class="stat-sublabel">Peak Performance</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">Weakest Month</span>
+                <span id="detailsWorstMonth" class="stat-value negative">--</span>
+                <span class="stat-sublabel">Lowest Performance</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">Assets Under Mgmt</span>
+                <span id="detailsAUM" class="stat-value">$0M</span>
+                <span class="stat-sublabel">Total AUM</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Risk & Volatility -->
+          <div class="detail-block risk-block">
+            <h3><span class="icon">⚠️</span> Risk & Volatility Assessment</h3>
+            <p id="detailsVolatility" class="detail-text risk-text"></p>
+          </div>
+
+          <!-- Suitability -->
+          <div class="detail-block suitability-block">
+            <h3><span class="icon">👤</span> Investor Suitability</h3>
+            <p id="detailsSuitability" class="detail-text"></p>
+          </div>
+
+          <!-- Monthly Performance Timeline -->
+          <div class="detail-block">
+            <h3><span class="icon">📅</span> Monthly Performance Timeline</h3>
+            <div id="monthlySummaryList" class="monthly-list">
+              <!-- Monthly summaries will be inserted here -->
+            </div>
+          </div>
+          
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer with Disclaimer -->
+    <footer class="footer">
+      <div class="disclaimer">
+        <h4>⚠️ Market Risk Disclaimer</h4>
+        <p>
+          <strong>IMPORTANT:</strong> Mutual fund investments are subject to market risks. Past performance is not indicative of future results. 
+          Please read all scheme-related documents carefully before investing. The fund's performance depends on various market factors 
+          and may fluctuate. Returns are not guaranteed. Investors should assess all risks, consult financial advisors, and consider 
+          their investment objectives before making investment decisions.
+        </p>
+        <p class="demo-notice">
+          All data presented in this dashboard is mock/static and for demonstration purposes only. This is not actual financial advice or real fund data.
+        </p>
+      </div>
+      <p class="copyright">&copy; 2026 Investment Fund Dashboard. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <!-- JavaScript files -->
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
