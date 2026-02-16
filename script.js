@@ -13,6 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
  * Initialize the application by rendering fund cards and comparison table
  */
 function initializeApp() {
+  loadThemePreference();
+  setupThemeToggle();
   renderFundCards();
   renderComparisonTable();
 }
@@ -60,10 +62,10 @@ function createFundCard(fund) {
   card.innerHTML = `
     <div class="fund-card-header">
       <div class="fund-card-title">
-        <h3 class="fund-name">${fund.name}</h3>
-        <span class="category-badge">${fund.category}</span>
+        <h3 class="fund-name">${fund.fundName}</h3>
+        <span class="category-badge">${fund.fundType}</span>
       </div>
-      <p class="fund-description">${fund.shortDescription}</p>
+      <p class="fund-description">${fund.description}</p>
     </div>
     
     <div class="fund-snapshot">
@@ -83,7 +85,7 @@ function createFundCard(fund) {
         </div>
         <div class="snapshot-item">
           <span class="snapshot-label">AUM</span>
-          <span class="snapshot-value">$${fund.aum}M</span>
+          <span class="snapshot-value">$${fund.AUM}M</span>
         </div>
         <div class="snapshot-item" style="grid-column: 1 / -1;">
           <span class="snapshot-label">Investment Horizon</span>
@@ -130,11 +132,11 @@ function renderComparisonTable() {
     
     const row = document.createElement('tr');
     row.innerHTML = `
-      <td>${fund.name}</td>
+      <td>${fund.fundName}</td>
       <td><span class="table-return ${returnClass}">${formatPercentage(sixMonthReturn)}</span></td>
       <td><span class="table-risk ${riskClass}">${fund.riskLevel}</span></td>
       <td>${fund.expenseRatio}%</td>
-      <td>$${fund.aum}M</td>
+      <td>$${fund.AUM}M</td>
       <td>${fund.investmentHorizon}</td>
     `;
     
@@ -172,9 +174,13 @@ function showFundDetails(fundId) {
   const detailsSection = document.getElementById('fundDetails');
   detailsSection.classList.remove('hidden');
   
+  // Store fund ID for theme toggle redraw
+  const fundNameElement = document.getElementById('detailsFundName');
+  fundNameElement.setAttribute('data-fund-id', fund.id);
+  
   // Populate fund name and category
-  document.getElementById('detailsFundName').textContent = fund.name;
-  document.getElementById('detailsCategory').textContent = fund.category;
+  document.getElementById('detailsFundName').textContent = fund.fundName;
+  document.getElementById('detailsCategory').textContent = fund.fundType;
   
   // Set risk badge
   const riskBadge = document.getElementById('detailsRiskBadge');
@@ -204,20 +210,23 @@ function showFundDetails(fundId) {
   }
   
   // Calculate and display best/worst months
-  const { bestMonth, worstMonth } = findBestWorstMonths(fund.monthlySummary);
+  const { bestMonth, worstMonth } = findBestWorstMonths(fund.monthlyPerformance);
   
-  document.getElementById('detailsBestMonth').textContent = formatPercentage(bestMonth.monthlyReturn);
-  document.getElementById('detailsWorstMonth').textContent = formatPercentage(worstMonth.monthlyReturn);
+  document.getElementById('detailsBestMonth').textContent = formatPercentage(bestMonth.return);
+  document.getElementById('detailsWorstMonth').textContent = formatPercentage(worstMonth.return);
   
   // Display AUM
-  document.getElementById('detailsAUM').textContent = `$${fund.aum}M`;
+  document.getElementById('detailsAUM').textContent = `$${fund.AUM}M`;
   
   // Populate volatility note and suitability
-  document.getElementById('detailsVolatility').textContent = fund.volatilityNote;
-  document.getElementById('detailsSuitability').textContent = fund.suitableFor;
+  document.getElementById('detailsVolatility').textContent = fund.volatilityText;
+  document.getElementById('detailsSuitability').textContent = fund.investorSuitability;
   
   // Render monthly summary with returns
-  renderMonthlySummary(fund.monthlySummary);
+  renderMonthlySummary(fund.monthlyPerformance);
+  
+  // Render performance chart
+  renderPerformanceChart(fund.monthlyPerformance);
 }
 
 // ========================================
@@ -226,24 +235,24 @@ function showFundDetails(fundId) {
 
 /**
  * Renders the monthly performance summary list with return percentages
- * @param {Array} monthlySummary - Array of month objects
+ * @param {Array} monthlyPerformance - Array of month objects
  */
-function renderMonthlySummary(monthlySummary) {
+function renderMonthlySummary(monthlyPerformance) {
   const summaryContainer = document.getElementById('monthlySummaryList');
   
   // Clear existing content
   summaryContainer.innerHTML = '';
   
   // Create an element for each month
-  monthlySummary.forEach(monthData => {
-    const returnClass = monthData.monthlyReturn >= 0 ? 'positive' : 'negative';
+  monthlyPerformance.forEach(monthData => {
+    const returnClass = monthData.return >= 0 ? 'positive' : 'negative';
     
     const monthItem = document.createElement('div');
     monthItem.className = 'month-item';
     
     monthItem.innerHTML = `
       <span class="month-name">${monthData.month}</span>
-      <span class="month-return ${returnClass}">${formatPercentage(monthData.monthlyReturn)}</span>
+      <span class="month-return ${returnClass}">${formatPercentage(monthData.return)}</span>
       <p class="month-summary">${monthData.summary}</p>
     `;
     
@@ -257,18 +266,18 @@ function renderMonthlySummary(monthlySummary) {
 
 /**
  * Finds the best and worst performing months from monthly summary
- * @param {Array} monthlySummary - Array of month objects
+ * @param {Array} monthlyPerformance - Array of month objects
  * @returns {Object} - {bestMonth, worstMonth}
  */
-function findBestWorstMonths(monthlySummary) {
-  let bestMonth = monthlySummary[0];
-  let worstMonth = monthlySummary[0];
+function findBestWorstMonths(monthlyPerformance) {
+  let bestMonth = monthlyPerformance[0];
+  let worstMonth = monthlyPerformance[0];
   
-  monthlySummary.forEach(month => {
-    if (month.monthlyReturn > bestMonth.monthlyReturn) {
+  monthlyPerformance.forEach(month => {
+    if (month.return > bestMonth.return) {
       bestMonth = month;
     }
-    if (month.monthlyReturn < worstMonth.monthlyReturn) {
+    if (month.return < worstMonth.return) {
       worstMonth = month;
     }
   });
@@ -309,4 +318,183 @@ function formatCurrency(value) {
 function formatPercentage(value) {
   const sign = value >= 0 ? '+' : '';
   return `${sign}${value.toFixed(2)}%`;
+}
+
+// ========================================
+// Performance Chart Rendering (Canvas)
+// ========================================
+
+let chartInstance = null;
+
+/**
+ * Renders a line chart for monthly performance using Canvas API
+ * @param {Array} monthlyPerformance - Array of monthly return objects
+ */
+function renderPerformanceChart(monthlyPerformance) {
+  const canvas = document.getElementById('performanceChart');
+  if (!canvas) return;
+  
+  const ctx = canvas.getContext('2d');
+  
+  // Set canvas size based on container
+  const parent = canvas.parentElement;
+  canvas.width = parent.offsetWidth - 40;
+  canvas.height = 300;
+  
+  // Extract data
+  const labels = monthlyPerformance.map(m => m.month.split(' ')[0]); // Just month abbreviation
+  const dataPoints = monthlyPerformance.map(m => m.return);
+  
+  // Calculate min/max for Y-axis scaling
+  const minValue = Math.min(...dataPoints, 0);
+  const maxValue = Math.max(...dataPoints, 0);
+  const padding = Math.abs(maxValue - minValue) * 0.15;
+  const yMin = minValue - padding;
+  const yMax = maxValue + padding;
+  const yRange = yMax - yMin;
+  
+  // Chart dimensions
+  const chartPadding = { top: 20, right: 20, bottom: 40, left: 50 };
+  const chartWidth = canvas.width - chartPadding.left - chartPadding.right;
+  const chartHeight = canvas.height - chartPadding.top - chartPadding.bottom;
+  
+  // Get theme colors
+  const isDarkMode = document.body.classList.contains('dark-mode');
+  const colors = {
+    gridLine: isDarkMode ? '#334155' : '#e2e8f0',
+    axisText: isDarkMode ? '#cbd5e1' : '#475569',
+    lineStroke: dataPoints[dataPoints.length - 1] >= 0 ? '#10b981' : '#dc2626',
+    lineFill: dataPoints[dataPoints.length - 1] >= 0 ? '#d1fae50d' : '#fee2e20d',
+    pointColor: '#3b82f6'
+  };
+  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = isDarkMode ? '#1e293b' : '#ffffff';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  
+  // Draw grid lines and Y-axis labels
+  ctx.strokeStyle = colors.gridLine;
+  ctx.fillStyle = colors.axisText;
+  ctx.font = '12px Inter, sans-serif';
+  ctx.textAlign = 'right';
+  
+  const gridLines = 5;
+  for (let i = 0; i <= gridLines; i++) {
+    const y = chartPadding.top + (chartHeight / gridLines) * i;
+    const value = yMax - (yRange / gridLines) * i;
+    
+    // Grid line
+    ctx.beginPath();
+    ctx.moveTo(chartPadding.left, y);
+    ctx.lineTo(canvas.width - chartPadding.right, y);
+    ctx.stroke();
+    
+    // Y-axis label
+    ctx.fillText(value.toFixed(1) + '%', chartPadding.left - 10, y + 4);
+  }
+  
+  // Draw X-axis labels
+  ctx.textAlign = 'center';
+  ctx.fillStyle = colors.axisText;
+  for (let i = 0; i < labels.length; i++) {
+    const x = chartPadding.left + (chartWidth / (labels.length - 1)) * i;
+    ctx.fillText(labels[i], x, canvas.height - chartPadding.bottom + 20);
+  }
+  
+  // Draw axes
+  ctx.strokeStyle = colors.axisText;
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(chartPadding.left, chartPadding.top);
+  ctx.lineTo(chartPadding.left, canvas.height - chartPadding.bottom);
+  ctx.lineTo(canvas.width - chartPadding.right, canvas.height - chartPadding.bottom);
+  ctx.stroke();
+  
+  // Draw line chart
+  ctx.strokeStyle = colors.lineStroke;
+  ctx.lineWidth = 2;
+  ctx.lineJoin = 'round';
+  ctx.lineCap = 'round';
+  
+  ctx.beginPath();
+  dataPoints.forEach((value, index) => {
+    const x = chartPadding.left + (chartWidth / (dataPoints.length - 1)) * index;
+    const y = chartPadding.top + chartHeight - ((value - yMin) / yRange) * chartHeight;
+    
+    if (index === 0) {
+      ctx.moveTo(x, y);
+    } else {
+      ctx.lineTo(x, y);
+    }
+  });
+  ctx.stroke();
+  
+  // Draw data points
+  ctx.fillStyle = colors.pointColor;
+  dataPoints.forEach((value, index) => {
+    const x = chartPadding.left + (chartWidth / (dataPoints.length - 1)) * index;
+    const y = chartPadding.top + chartHeight - ((value - yMin) / yRange) * chartHeight;
+    
+    ctx.beginPath();
+    ctx.arc(x, y, 4, 0, 2 * Math.PI);
+    ctx.fill();
+  });
+}
+
+// ========================================
+// Dark Mode Toggle
+// ========================================
+
+/**
+ * Load theme preference from localStorage and apply
+ */
+function loadThemePreference() {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark') {
+    document.body.classList.add('dark-mode');
+    updateThemeIcon('☀️');
+  } else {
+    document.body.classList.remove('dark-mode');
+    updateThemeIcon('🌙');
+  }
+}
+
+/**
+ * Setup theme toggle button click handler
+ */
+function setupThemeToggle() {
+  const toggleBtn = document.getElementById('themeToggle');
+  if (!toggleBtn) return;
+  
+  toggleBtn.addEventListener('click', () => {
+    const isDark = document.body.classList.toggle('dark-mode');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    updateThemeIcon(isDark ? '☀️' : '🌙');
+    
+    // Redraw chart with new theme colors
+    const detailsSection = document.getElementById('fundDetails');
+    if (!detailsSection.classList.contains('hidden')) {
+      const fundId = parseInt(document.getElementById('detailsFundName').getAttribute('data-fund-id') || '0');
+      if (fundId > 0) {
+        const fund = fundsData.find(f => f.id === fundId);
+        if (fund) {
+          renderPerformanceChart(fund.monthlyPerformance);
+        }
+      }
+    }
+  });
+}
+
+/**
+ * Update the theme toggle button icon
+ * @param {string} icon - Icon to display
+ */
+function updateThemeIcon(icon) {
+  const toggleBtn = document.getElementById('themeToggle');
+  if (toggleBtn) {
+    const iconSpan = toggleBtn.querySelector('.theme-icon');
+    if (iconSpan) {
+      iconSpan.textContent = icon;
+    }
+  }
 }

@@ -24,6 +24,9 @@
         <h1>Investment Fund Dashboard</h1>
         <p class="subtitle">Professional Portfolio Management & Fund Analysis Platform</p>
       </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-icon">🌙</span>
+      </button>
     </header>
 
     <!-- Main Content Area -->
@@ -116,6 +119,14 @@
                 <span id="detailsAUM" class="stat-value">$0M</span>
                 <span class="stat-sublabel">Total AUM</span>
               </div>
+            </div>
+          </div>
+
+          <!-- Monthly Performance Timeline -->
+          <div class="detail-block">
+            <h3><span class="icon">📈</span> 6-Month Performance Chart</h3>
+            <div class="chart-wrapper">
+              <canvas id="performanceChart"></canvas>
             </div>
           </div>
 

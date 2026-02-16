@@ -9,7 +9,7 @@
 }
 
 :root {
-  /* Professional Finance Color Palette */
+  /* Professional Finance Color Palette - Light Mode */
   --primary-dark: #0f172a;         /* Navy blue - headers */
   --primary-blue: #1e40af;         /* Professional blue */
   --primary-light: #3b82f6;        /* Bright blue - accents */
@@ -36,6 +36,30 @@
   --border-radius: 8px;
   --border-radius-lg: 12px;
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark Mode Theme */
+body.dark-mode {
+  --primary-dark: #e2e8f0;         /* Light text for dark background */
+  --primary-blue: #60a5fa;         /* Lighter blue */
+  --primary-light: #93c5fd;        /* Even lighter blue */
+  --success-green: #10b981;        /* Brighter green */
+  --danger-red: #ef4444;           /* Brighter red */
+  --warning-orange: #f97316;       /* Brighter orange */
+  --bg-primary: #1e293b;           /* Dark background */
+  --bg-secondary: #0f172a;         /* Darker background */
+  --bg-tertiary: #334155;          /* Slightly lighter dark */
+  --text-primary: #f1f5f9;         /* Light text */
+  --text-secondary: #cbd5e1;       /* Medium light text */
+  --text-muted: #64748b;           /* Muted light text */
+  --border-light: #334155;         /* Dark borders */
+  --border-medium: #475569;        /* Medium dark borders */
+  
+  /* Shadows for dark mode */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
 }
 
 body {
@@ -67,6 +91,10 @@ body {
   position: relative;
 }
 
+body.dark-mode .header {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+}
+
 .header::before {
   content: '';
   position: absolute;
@@ -83,6 +111,36 @@ body {
   z-index: 1;
   padding: 48px 40px;
   text-align: center;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: var(--transition);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
 }
 
 .header h1 {
@@ -195,6 +253,21 @@ body {
   color: var(--text-secondary);
   font-size: 0.9rem;
   line-height: 1.6;
+}
+
+/* Chart Styling */
+.chart-wrapper {
+  padding: 20px;
+  background: var(--bg-primary);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-light);
+}
+
+#performanceChart {
+  width: 100%;
+  height: 300px;
+  max-height: 50vh;
+  display: block;
 }
 
 /* Fund Snapshot Metrics */

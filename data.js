@@ -1,129 +1,320 @@
-// Mock data for investment funds
-// Extended with professional finance-grade metrics for enhanced dashboard
+// Mock data for investment funds - Comprehensive catalog with 12 fund types
+// Updated with standardized property names: fundName, fundType, monthlyPerformance
 
 const fundsData = [
+  // ===== TIER 1: EXISTING FUNDS (MIGRATED) =====
   {
     id: 1,
-    name: "Equity Fund",
-    category: "Equity",
-    shortDescription: "High-growth stock investments for long-term wealth building",
-    fullDescription: "This equity fund focuses on large-cap and mid-cap stocks across diverse sectors including technology, healthcare, and consumer goods. Designed for investors seeking capital appreciation over a 5-10 year horizon with moderate to high risk tolerance.",
-    
-    // Performance metrics
-    startValue: 10000,  // Value 6 months ago (August 2025)
-    currentValue: 11250, // Current value (February 2026)
-    
-    // Fund snapshot metrics
+    fundName: "Equity Fund",
+    fundType: "Equity",
+    description: "High-growth stock investments for long-term wealth building",
     riskLevel: "High",
-    expenseRatio: 0.75,  // Annual expense ratio as percentage
-    aum: 2450,  // Assets Under Management in millions USD
+    expenseRatio: 0.75,
+    AUM: 2450,
     investmentHorizon: "Long Term (7+ years)",
-    
-    // Detailed analysis
     investmentObjective: "To achieve long-term capital appreciation by investing primarily in a diversified portfolio of equity securities of companies with strong growth potential. The fund targets a mix of large-cap and mid-cap stocks across technology, healthcare, financial services, and consumer discretionary sectors.",
-    volatilityNote: "This fund exhibits higher volatility compared to balanced or debt funds. Expect price fluctuations of ±15-25% annually. Suitable for investors with strong risk appetite and long investment horizons.",
-    suitableFor: "Aggressive investors aged 25-45 with stable income, long-term wealth creation goals, and ability to withstand market volatility. Not suitable for retirees or conservative investors seeking stable income.",
-    
-    monthlySummary: [
-      { month: "Aug 2025", summary: "Strong start with tech sector gains driving 3.2% growth", monthlyReturn: 3.2 },
-      { month: "Sep 2025", summary: "Consolidation phase with minor 0.5% dip due to market volatility", monthlyReturn: -0.5 },
-      { month: "Oct 2025", summary: "Recovery momentum with healthcare stocks leading 2.8% increase", monthlyReturn: 2.8 },
-      { month: "Nov 2025", summary: "Steady growth of 1.9% supported by positive earnings reports", monthlyReturn: 1.9 },
-      { month: "Dec 2025", summary: "Year-end rally pushing portfolio up 4.1% on strong consumer spending", monthlyReturn: 4.1 },
-      { month: "Jan 2026", summary: "Slight correction of 1.2% as investors took profits after strong Q4", monthlyReturn: -1.2 }
+    volatilityText: "This fund exhibits higher volatility compared to balanced or debt funds. Expect price fluctuations of ±15-25% annually. Suitable for investors with strong risk appetite and long investment horizons.",
+    investorSuitability: "Aggressive investors aged 25-45 with stable income, long-term wealth creation goals, and ability to withstand market volatility. Not suitable for retirees or conservative investors seeking stable income.",
+    startingValue: 10000,
+    currentValue: 11250,
+    bestMonth: "Dec 2025",
+    weakestMonth: "Sep 2025",
+    monthlyPerformance: [
+      { month: "Aug 2025", summary: "Strong start with tech sector gains driving 3.2% growth", return: 3.2 },
+      { month: "Sep 2025", summary: "Consolidation phase with minor 0.5% dip due to market volatility", return: -0.5 },
+      { month: "Oct 2025", summary: "Recovery momentum with healthcare stocks leading 2.8% increase", return: 2.8 },
+      { month: "Nov 2025", summary: "Steady growth of 1.9% supported by positive earnings reports", return: 1.9 },
+      { month: "Dec 2025", summary: "Year-end rally pushing portfolio up 4.1% on strong consumer spending", return: 4.1 },
+      { month: "Jan 2026", summary: "Slight correction of 1.2% as investors took profits after strong Q4", return: -1.2 },
+      { month: "Feb 2026", summary: "Stabilization with modest 0.8% gain", return: 0.8 }
     ]
   },
   {
     id: 2,
-    name: "Debt Fund",
-    category: "Debt",
-    shortDescription: "Stable income through government and corporate bonds",
-    fullDescription: "A conservative debt fund investing primarily in AAA-rated government securities and high-quality corporate bonds. Ideal for risk-averse investors seeking steady returns with capital preservation. Portfolio duration is maintained between 3-5 years to balance yield and interest rate risk.",
-    
-    // Performance metrics
-    startValue: 10000,
-    currentValue: 10320,
-    
-    // Fund snapshot metrics
+    fundName: "Debt Fund",
+    fundType: "Debt",
+    description: "Stable income through government and corporate bonds",
     riskLevel: "Low",
     expenseRatio: 0.45,
-    aum: 5280,
+    AUM: 5280,
     investmentHorizon: "Short to Medium Term (1-3 years)",
-    
-    // Detailed analysis
     investmentObjective: "To generate regular income and preserve capital by investing in high-quality debt instruments including government securities, AAA-rated corporate bonds, and money market instruments. The fund maintains a balanced duration profile to minimize interest rate risk while optimizing yield.",
-    volatilityNote: "Low volatility fund with minimal principal risk. Expected annual fluctuations of ±2-4%. Primary risk is interest rate changes affecting bond prices. Suitable for conservative investors prioritizing capital safety.",
-    suitableFor: "Conservative investors, retirees seeking steady income, individuals with short to medium-term financial goals (1-3 years), and those looking to park surplus funds with minimal risk exposure.",
-    
-    monthlySummary: [
-      { month: "Aug 2025", summary: "Stable performance with 0.5% return from bond coupon payments", monthlyReturn: 0.5 },
-      { month: "Sep 2025", summary: "Minor gains of 0.4% as interest rates remained steady", monthlyReturn: 0.4 },
-      { month: "Oct 2025", summary: "Slight uptick of 0.6% from new government securities allocation", monthlyReturn: 0.6 },
-      { month: "Nov 2025", summary: "Consistent 0.5% growth maintaining steady income trajectory", monthlyReturn: 0.5 },
-      { month: "Dec 2025", summary: "Strong month with 0.7% gain from corporate bond additions", monthlyReturn: 0.7 },
-      { month: "Jan 2026", summary: "Modest 0.5% increase reflecting stable bond market conditions", monthlyReturn: 0.5 }
+    volatilityText: "Low volatility fund with minimal principal risk. Expected annual fluctuations of ±2-4%. Primary risk is interest rate changes affecting bond prices. Suitable for conservative investors prioritizing capital safety.",
+    investorSuitability: "Conservative investors, retirees seeking steady income, individuals with short to medium-term financial goals (1-3 years), and those looking to park surplus funds with minimal risk exposure.",
+    startingValue: 10000,
+    currentValue: 10320,
+    bestMonth: "Dec 2025",
+    weakestMonth: "Aug 2025",
+    monthlyPerformance: [
+      { month: "Aug 2025", summary: "Stable performance with 0.5% return from bond coupon payments", return: 0.5 },
+      { month: "Sep 2025", summary: "Minor gains of 0.4% as interest rates remained steady", return: 0.4 },
+      { month: "Oct 2025", summary: "Slight uptick of 0.6% from new government securities allocation", return: 0.6 },
+      { month: "Nov 2025", summary: "Consistent 0.5% growth maintaining steady income trajectory", return: 0.5 },
+      { month: "Dec 2025", summary: "Strong month with 0.7% gain from corporate bond additions", return: 0.7 },
+      { month: "Jan 2026", summary: "Modest 0.5% increase reflecting stable bond market conditions", return: 0.5 },
+      { month: "Feb 2026", summary: "Steady 0.6% return as interest rates stabilized", return: 0.6 }
     ]
   },
   {
     id: 3,
-    name: "Hybrid Fund",
-    category: "Hybrid",
-    shortDescription: "Balanced mix of stocks and bonds for moderate growth",
-    fullDescription: "This balanced hybrid fund maintains a 60:40 equity-to-debt ratio, providing growth potential while managing downside risk. The equity portion focuses on blue-chip stocks, while the debt component invests in investment-grade bonds. Suitable for investors seeking moderate returns with controlled volatility.",
-    
-    // Performance metrics
-    startValue: 10000,
-    currentValue: 10680,
-    
-    // Fund snapshot metrics
+    fundName: "Hybrid Fund",
+    fundType: "Hybrid",
+    description: "Balanced mix of stocks and bonds for moderate growth",
     riskLevel: "Medium",
     expenseRatio: 0.65,
-    aum: 3850,
+    AUM: 3850,
     investmentHorizon: "Medium Term (3-5 years)",
-    
-    // Detailed analysis
     investmentObjective: "To provide balanced growth and income by maintaining a strategic allocation between equity (60%) and debt (40%) instruments. The fund dynamically rebalances to maintain target allocation while capitalizing on market opportunities in both asset classes.",
-    volatilityNote: "Moderate volatility with balanced risk profile. Expected annual fluctuations of ±8-12%. The debt component cushions equity market downturns, making this suitable for investors seeking growth with reduced volatility compared to pure equity funds.",
-    suitableFor: "Moderate risk investors aged 30-55, first-time mutual fund investors, those seeking balanced exposure to equity and debt, and investors with medium-term financial goals like children's education or home downpayment.",
-    
-    monthlySummary: [
-      { month: "Aug 2025", summary: "Balanced gains of 1.8% with equity portion outperforming bonds", monthlyReturn: 1.8 },
-      { month: "Sep 2025", summary: "Minor fluctuation showing 0.2% growth as equity and debt balanced out", monthlyReturn: 0.2 },
-      { month: "Oct 2025", summary: "Solid 1.5% increase driven by both asset classes performing well", monthlyReturn: 1.5 },
-      { month: "Nov 2025", summary: "Steady uptrend of 1.2% reflecting diversification benefits", monthlyReturn: 1.2 },
-      { month: "Dec 2025", summary: "Best month with 2.3% gain from equity rally and bond stability", monthlyReturn: 2.3 },
-      { month: "Jan 2026", summary: "Slight pullback of 0.2% as equity portion corrected slightly", monthlyReturn: -0.2 }
+    volatilityText: "Moderate volatility with balanced risk profile. Expected annual fluctuations of ±8-12%. The debt component cushions equity market downturns, making this suitable for investors seeking growth with reduced volatility compared to pure equity funds.",
+    investorSuitability: "Moderate risk investors aged 30-55, first-time mutual fund investors, those seeking balanced exposure to equity and debt, and investors with medium-term financial goals like children's education or home downpayment.",
+    startingValue: 10000,
+    currentValue: 10680,
+    bestMonth: "Dec 2025",
+    weakestMonth: "Sep 2025",
+    monthlyPerformance: [
+      { month: "Aug 2025", summary: "Balanced gains of 1.8% with equity portion outperforming bonds", return: 1.8 },
+      { month: "Sep 2025", summary: "Minor fluctuation showing 0.2% growth as equity and debt balanced out", return: 0.2 },
+      { month: "Oct 2025", summary: "Solid 1.5% increase driven by both asset classes performing well", return: 1.5 },
+      { month: "Nov 2025", summary: "Steady uptrend of 1.2% reflecting diversification benefits", return: 1.2 },
+      { month: "Dec 2025", summary: "Best month with 2.3% gain from equity rally and bond stability", return: 2.3 },
+      { month: "Jan 2026", summary: "Slight pullback of 0.2% as equity portion corrected slightly", return: -0.2 },
+      { month: "Feb 2026", summary: "Recovery with 1.1% gain as markets stabilized", return: 1.1 }
     ]
   },
   {
     id: 4,
-    name: "Index Fund",
-    category: "Index",
-    shortDescription: "Low-cost tracking of major market indices",
-    fullDescription: "A passive index fund that mirrors the performance of the S&P 500 index with minimal tracking error. Offers broad market exposure across 500 leading U.S. companies with extremely low expense ratios. Perfect for long-term investors who believe in market efficiency and want to match benchmark returns.",
-    
-    // Performance metrics
-    startValue: 10000,
-    currentValue: 11080,
-    
-    // Fund snapshot metrics
+    fundName: "Index Fund",
+    fundType: "Index",
+    description: "Low-cost tracking of major market indices",
     riskLevel: "Medium-High",
-    expenseRatio: 0.15,  // Very low for passive index tracking
-    aum: 8920,
+    expenseRatio: 0.15,
+    AUM: 8920,
     investmentHorizon: "Long Term (5+ years)",
-    
-    // Detailed analysis
     investmentObjective: "To replicate the performance of the S&P 500 index by investing in the same stocks in proportional weights. The fund employs passive management with minimal trading, resulting in low costs and tax efficiency. Ideal for investors seeking broad U.S. equity market exposure.",
-    volatilityNote: "Moderate-to-high volatility reflecting overall U.S. stock market movements. Expected annual fluctuations of ±12-18%. No active management to reduce downside risk, but diversification across 500 companies mitigates individual stock risk.",
-    suitableFor: "Cost-conscious long-term investors, those believing in passive investing philosophy, retirement savers (401k/IRA), and investors seeking diversified U.S. equity exposure without active management fees.",
-    
-    monthlySummary: [
-      { month: "Aug 2025", summary: "Index rose 2.8% tracking broad market gains across sectors", monthlyReturn: 2.8 },
-      { month: "Sep 2025", summary: "Flat performance at 0.1% mirroring market consolidation", monthlyReturn: 0.1 },
-      { month: "Oct 2025", summary: "Strong rebound of 2.5% following positive economic indicators", monthlyReturn: 2.5 },
-      { month: "Nov 2025", summary: "Continued momentum with 1.7% gain matching S&P 500 benchmark", monthlyReturn: 1.7 },
-      { month: "Dec 2025", summary: "Robust 3.2% increase driven by year-end market optimism", monthlyReturn: 3.2 },
-      { month: "Jan 2026", summary: "Minor correction of 0.8% aligning with overall market pullback", monthlyReturn: -0.8 }
+    volatilityText: "Moderate-to-high volatility reflecting overall U.S. stock market movements. Expected annual fluctuations of ±12-18%. No active management to reduce downside risk, but diversification across 500 companies mitigates individual stock risk.",
+    investorSuitability: "Cost-conscious long-term investors, those believing in passive investing philosophy, retirement savers (401k/IRA), and investors seeking diversified U.S. equity exposure without active management fees.",
+    startingValue: 10000,
+    currentValue: 11080,
+    bestMonth: "Dec 2025",
+    weakestMonth: "Jan 2026",
+    monthlyPerformance: [
+      { month: "Aug 2025", summary: "Index rose 2.8% tracking broad market gains across sectors", return: 2.8 },
+      { month: "Sep 2025", summary: "Flat performance at 0.1% mirroring market consolidation", return: 0.1 },
+      { month: "Oct 2025", summary: "Strong rebound of 2.5% following positive economic indicators", return: 2.5 },
+      { month: "Nov 2025", summary: "Continued momentum with 1.7% gain matching S&P 500 benchmark", return: 1.7 },
+      { month: "Dec 2025", summary: "Robust 3.2% increase driven by year-end market optimism", return: 3.2 },
+      { month: "Jan 2026", summary: "Minor correction of 0.8% aligning with overall market pullback", return: -0.8 },
+      { month: "Feb 2026", summary: "Recovery mode with 1.3% gain on positive Fed signals", return: 1.3 }
+    ]
+  },
+
+  // ===== TIER 2: NEW FUND TYPES =====
+  {
+    id: 5,
+    fundName: "Mutual Fund - Large Cap",
+    fundType: "Mutual Fund",
+    description: "Actively managed portfolio of large-cap stocks",
+    riskLevel: "Medium-High",
+    expenseRatio: 0.85,
+    AUM: 3200,
+    investmentHorizon: "Long Term (5-7 years)",
+    investmentObjective: "To achieve capital appreciation by investing in equity shares of large-cap companies with established track records and strong fundamentals. The fund focuses on companies with market capitalization exceeding $10 billion, providing stability with growth potential.",
+    volatilityText: "Medium-high volatility with active management to optimize returns. Expected annual fluctuations of ±14-20%. Active stock picking aims to outperform index benchmarks through superior analysis and timing.",
+    investorSuitability: "Growth-oriented investors aged 30-50, those comfortable with moderate market volatility, investors seeking outperformance beyond index tracking, and those with extended investment horizons.",
+    startingValue: 10000,
+    currentValue: 11650,
+    bestMonth: "Dec 2025",
+    weakestMonth: "Sep 2025",
+    monthlyPerformance: [
+      { month: "Aug 2025", summary: "Strong opener with 3.8% gain from overweight tech positions", return: 3.8 },
+      { month: "Sep 2025", summary: "Sector rotation resulted in 0.3% gain despite market volatility", return: 0.3 },
+      { month: "Oct 2025", summary: "Recovery with 3.2% increase from healthcare and financials rally", return: 3.2 },
+      { month: "Nov 2025", summary: "Solid 2.1% gain supported by strong earnings season", return: 2.1 },
+      { month: "Dec 2025", summary: "Year-end strength delivering 4.5% gain", return: 4.5 },
+      { month: "Jan 2026", summary: "Profit-taking led to 1.5% decline", return: -1.5 },
+      { month: "Feb 2026", summary: "Rebalancing into undervalued sectors yielded 1.9% gain", return: 1.9 }
+    ]
+  },
+  {
+    id: 6,
+    fundName: "Mutual Fund - Mid Cap",
+    fundType: "Mutual Fund",
+    description: "Growth-focused mid-cap equity fund",
+    riskLevel: "High",
+    expenseRatio: 0.95,
+    AUM: 2100,
+    investmentHorizon: "Long Term (7+ years)",
+    investmentObjective: "To deliver superior long-term capital appreciation by investing in mid-cap companies with strong growth trajectories and emerging market positions. The fund seeks companies poised to transition into large-cap status with significant upside potential.",
+    volatilityText: "High volatility fund reflecting mid-cap market dynamics. Expected annual fluctuations of ±20-28%. Higher risk is balanced by greater growth potential compared to large-cap funds. Requires conviction and patience through cycles.",
+    investorSuitability: "Aggressive growth investors aged 25-45, those with high risk tolerance, investors seeking exposure to emerging market leaders, and those with long investment horizons (7+ years) to weather volatility.",
+    startingValue: 10000,
+    currentValue: 12340,
+    bestMonth: "Dec 2025",
+    weakestMonth: "Sep 2025",
+    monthlyPerformance: [
+      { month: "Aug 2025", summary: "Explosive start with 5.2% gain from growth stock strength", return: 5.2 },
+      { month: "Sep 2025", summary: "Sharp 2.3% correction as growth concerns emerged", return: -2.3 },
+      { month: "Oct 2025", summary: "Dramatic recovery with 4.8% surge on earnings surprises", return: 4.8 },
+      { month: "Nov 2025", summary: "Continued strength with 3.1% gain from IPO cycle", return: 3.1 },
+      { month: "Dec 2025", summary: "Year-end rally delivering 5.9% spectacular gain", return: 5.9 },
+      { month: "Jan 2026", summary: "Consolidation with 2.2% decline after strong run", return: -2.2 },
+      { month: "Feb 2026", summary: "Renewed momentum with 2.7% gain from tech rebound", return: 2.7 }
+    ]
+  },
+  {
+    id: 7,
+    fundName: "Mutual Fund - Small Cap",
+    fundType: "Mutual Fund",
+    description: "High-risk, high-reward small-cap equity exposure",
+    riskLevel: "High",
+    expenseRatio: 1.05,
+    AUM: 980,
+    investmentHorizon: "Long Term (10+ years)",
+    investmentObjective: "To maximize long-term capital appreciation through concentrated investments in small-cap and micro-cap companies with exceptional growth potential. The fund seeks emerging market disruptors and innovative companies before mainstream recognition.",
+    volatilityText: "Very high volatility reflecting small-cap market unpredictability. Expected annual fluctuations of ±30-40%. Significant short-term fluctuations are expected but well-suited for investors with multi-decade horizons and high conviction.",
+    investorSuitability: "Extremely aggressive investors aged 20-35, experienced investors comfortable with significant drawdowns, those seeking wealth creation through emerging market leaders, and investors with 10+ year horizons.",
+    startingValue: 10000,
+    currentValue: 13580,
+    bestMonth: "Dec 2025",
+    weakestMonth: "Sep 2025",
+    monthlyPerformance: [
+      { month: "Aug 2025", summary: "Exceptional 7.1% gain from breakout small-cap names", return: 7.1 },
+      { month: "Sep 2025", summary: "Severe 4.8% pullback amid market risk-off sentiment", return: -4.8 },
+      { month: "Oct 2025", summary: "Spectacular 6.9% recovery as growth themes reasserted", return: 6.9 },
+      { month: "Nov 2025", summary: "Strong 4.2% gain from momentum-driven trading", return: 4.2 },
+      { month: "Dec 2025", summary: "Phenomenal 7.8% year-end surge", return: 7.8 },
+      { month: "Jan 2026", summary: "Profit-taking resulted in 3.1% pullback", return: -3.1 },
+      { month: "Feb 2026", summary: "Sharp 5.5% rebound on tech recovery", return: 5.5 }
+    ]
+  },
+  {
+    id: 8,
+    fundName: "ELSS Tax Saving Fund",
+    fundType: "ELSS",
+    description: "Tax-efficient equity fund with 3-year lock-in period",
+    riskLevel: "Medium-High",
+    expenseRatio: 0.75,
+    AUM: 4560,
+    investmentHorizon: "Medium Term (3-7 years)",
+    investmentObjective: "To provide tax-efficient wealth creation through equity investments while offering Section 80C tax deduction benefits. The fund maintains flexibility in sector allocation while adhering to lock-in requirements, balancing growth with disciplined tax planning.",
+    volatilityText: "Medium-high volatility with lock-in period providing discipline. Expected annual fluctuations of ±16-22%. Lock-in enforces long-term perspective, reducing emotional selling pressure and enhancing compounding benefits.",
+    investorSuitability: "Tax-conscious investors aged 30-55 seeking Section 80C deductions, those with 3+ year investment horizons, high-income earners in higher tax brackets, and individuals integrating tax planning with wealth creation strategies.",
+    startingValue: 10000,
+    currentValue: 10950,
+    bestMonth: "Dec 2025",
+    weakestMonth: "Sep 2025",
+    monthlyPerformance: [
+      { month: "Aug 2025", summary: "Solid 2.8% start capturing growth equity momentum", return: 2.8 },
+      { month: "Sep 2025", summary: "Minor 0.8% dip as market corrected", return: -0.8 },
+      { month: "Oct 2025", summary: "Recovery with 2.4% gain from tax-advantage appeal", return: 2.4 },
+      { month: "Nov 2025", summary: "Steady 1.8% growth from month-end buying", return: 1.8 },
+      { month: "Dec 2025", summary: "Strong 3.2% gain from year-end tax-planning flows", return: 3.2 },
+      { month: "Jan 2026", summary: "Consolidation with 0.9% increase", return: 0.9 },
+      { month: "Feb 2026", summary: "Modest 1.1% gain as fresh allocations continue", return: 1.1 }
+    ]
+  },
+  {
+    id: 9,
+    fundName: "Sectoral Fund - Technology",
+    fundType: "Sectoral",
+    description: "Concentrated exposure to tech sector leaders and innovators",
+    riskLevel: "High",
+    expenseRatio: 1.15,
+    AUM: 1650,
+    investmentHorizon: "Long Term (5-10 years)",
+    investmentObjective: "To capture technology sector growth through concentrated portfolio of IT infrastructure, software, semiconductors, and digital transformation leaders. The fund seeks secular growth trends including cloud computing, AI, and cybersecurity.",
+    volatilityText: "Very high volatility inherent to technology sector concentration. Expected annual fluctuations of ±25-35%. Sector cycles create significant short-term swings but offer substantial long-term appreciation potential.",
+    investorSuitability: "Tech-savvy investors aged 25-50 with conviction in technology disruption, those comfortable with sector concentration risk, investors with 5+ year horizons, and those bullish on digital transformation themes.",
+    startingValue: 10000,
+    currentValue: 12890,
+    bestMonth: "Dec 2025",
+    weakestMonth: "Sep 2025",
+    monthlyPerformance: [
+      { month: "Aug 2025", summary: "Phenomenal 6.5% surge from AI enthusiasm", return: 6.5 },
+      { month: "Sep 2025", summary: "Volatile 3.2% decline amid tech rotation fears", return: -3.2 },
+      { month: "Oct 2025", summary: "Strong 5.8% recovery as AI narrative strengthened", return: 5.8 },
+      { month: "Nov 2025", summary: "Solid 3.9% gain from earnings season strength", return: 3.9 },
+      { month: "Dec 2025", summary: "Explosive 6.2% year-end rally on innovation stories", return: 6.2 },
+      { month: "Jan 2026", summary: "Shadow 2.8% pullback on valuation concerns", return: -2.8 },
+      { month: "Feb 2026", summary: "Rebound with 3.1% gain as valuations reset", return: 3.1 }
+    ]
+  },
+  {
+    id: 10,
+    fundName: "International Equity Fund",
+    fundType: "International",
+    description: "Global equity exposure across developed and emerging markets",
+    riskLevel: "Medium-High",
+    expenseRatio: 0.95,
+    AUM: 2880,
+    investmentHorizon: "Long Term (5-10 years)",
+    investmentObjective: "To deliver diversified returns through exposure to international equity markets across Americas, Europe, and Asia-Pacific regions. The fund provides hedge against domestic market concentration while accessing global growth opportunities and currency diversification.",
+    volatilityText: "Medium-high volatility with currency exposure adding an additional risk dimension. Expected annual fluctuations of ±15-22%. Currency fluctuations can enhance or detract returns independently of underlying market movements.",
+    investorSuitability: "Internationally-minded investors aged 30-55, those seeking global diversification beyond domestic markets, investors comfortable with currency risk, and those with 5+ year investment horizons.",
+    startingValue: 10000,
+    currentValue: 11520,
+    bestMonth: "Dec 2025",
+    weakestMonth: "Oct 2025",
+    monthlyPerformance: [
+      { month: "Aug 2025", summary: "Steady 2.4% gain from emerging market strength", return: 2.4 },
+      { month: "Sep 2025", summary: "Solid 1.9% increase from European recovery", return: 1.9 },
+      { month: "Oct 2025", summary: "Minor 0.6% pullback amid currency headwinds", return: -0.6 },
+      { month: "Nov 2025", summary: "Recovery with 2.1% gain from risk-on sentiment", return: 2.1 },
+      { month: "Dec 2025", summary: "Strong 3.4% year-end rally with yen weakness helping", return: 3.4 },
+      { month: "Jan 2026", summary: "Consolidation with 0.8% gain", return: 0.8 },
+      { month: "Feb 2026", summary: "Modest 1.5% increase from emerging market demand", return: 1.5 }
+    ]
+  },
+  {
+    id: 11,
+    fundName: "Gold Fund",
+    fundType: "Gold",
+    description: "Inflation hedge through precious metals exposure",
+    riskLevel: "Low",
+    expenseRatio: 0.55,
+    AUM: 1420,
+    investmentHorizon: "Medium Term (3-5 years)",
+    investmentObjective: "To provide portfolio diversification and inflation protection through direct exposure to gold bullion and gold-linked instruments. The fund offers safe haven characteristics during equity market turmoil and macroeconomic uncertainty.",
+    volatilityText: "Low-to-moderate volatility reflecting gold market dynamics. Expected annual fluctuations of ±8-12%. Gold typically moves inversely to equities, providing portfolio insurance and downside protection during market stress.",
+    investorSuitability: "Conservative-to-moderate investors aged 40-65, those seeking inflation protection and portfolio insurance, investors approaching retirement wanting stability, and those concerned about geopolitical risks.",
+    startingValue: 10000,
+    currentValue: 10680,
+    bestMonth: "Feb 2026",
+    weakestMonth: "Aug 2025",
+    monthlyPerformance: [
+      { month: "Aug 2025", summary: "Modest 0.9% gain from geopolitical tensions", return: 0.9 },
+      { month: "Sep 2025", summary: "Slight 0.3% increase from equity volatility spillover", return: 0.3 },
+      { month: "Oct 2025", summary: "Strong 1.8% gain amid global uncertainty", return: 1.8 },
+      { month: "Nov 2025", summary: "Steady 1.2% increase from inflation concerns", return: 1.2 },
+      { month: "Dec 2025", summary: "Solid 1.5% gain as risk-off flows emerged", return: 1.5 },
+      { month: "Jan 2026", summary: "Minor 0.7% pullback on strength in equities", return: -0.7 },
+      { month: "Feb 2026", summary: "Strong 2.1% recovery on renewed risk-aversion", return: 2.1 }
+    ]
+  },
+  {
+    id: 12,
+    fundName: "Liquid Fund",
+    fundType: "Liquid",
+    description: "Ultra-short-term parking for surplus cash reserves",
+    riskLevel: "Low",
+    expenseRatio: 0.35,
+    AUM: 7240,
+    investmentHorizon: "Short Term (1-6 months)",
+    investmentObjective: "To generate steady returns on surplus cash through investments in highly liquid money market instruments, treasury bills, and short-duration papers. The fund prioritizes liquidity and capital preservation over growth.",
+    volatilityText: "Minimal volatility with virtually no principal risk. Expected annual fluctuations of ±1-2%. Primary returns come from current interest rates and money market yields rather than price appreciation.",
+    investorSuitability: "Conservative investors seeking temporary parking, retirees requiring accessible reserves for immediate needs, businesses managing working capital, and those avoiding equity market participation temporarily.",
+    startingValue: 10000,
+    currentValue: 10180,
+    bestMonth: "Feb 2026",
+    weakestMonth: "Aug 2025",
+    monthlyPerformance: [
+      { month: "Aug 2025", summary: "Steady 0.3% return from money market yields", return: 0.3 },
+      { month: "Sep 2025", summary: "Consistent 0.3% gain from short-term instruments", return: 0.3 },
+      { month: "Oct 2025", summary: "Modest 0.4% increase reflecting rate environment", return: 0.4 },
+      { month: "Nov 2025", summary: "Steady 0.3% return from overnight markets", return: 0.3 },
+      { month: "Dec 2025", summary: "Solid 0.4% gain from year-end liquidity premium", return: 0.4 },
+      { month: "Jan 2026", summary: "Consistent 0.3% return", return: 0.3 },
+      { month: "Feb 2026", summary: "Steady 0.4% gain from rising interest rates", return: 0.4 }
     ]
   }
 ];
